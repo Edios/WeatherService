@@ -1,20 +1,19 @@
-from dataclasses import field
+from dataclasses import field, dataclass
 
 
+@dataclass
 class Holiday:
     name:str
     date:str
 
+@dataclass
 class TemperatureStatistic:
     date:str
     temperature:int
 
+@dataclass
 class HolidayTemperatureStatistics:
-    date_from:str
-    date_to:str
-    #Represent Holiday specific day
-    date:str
-    temperatures:list[TemperatureStatistic]=field(init=False)
+    temperatureStatistics:list[TemperatureStatistic]=field(init=False)
 
     def get_temperatures(self):
 

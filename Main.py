@@ -2,6 +2,7 @@
 # from WeatherService.HolidayTemperatureStatistics import HolidayTemperatureStatistics
 from tkinter.ttk import Combobox
 
+from WeatherService.DataModel import TemperatureStatistic
 from WeatherService.DataService import DataRetrievalService
 #
 # holiday_list = DataRetrievalService().get_country_holidays_list()
@@ -20,6 +21,7 @@ from WeatherService.DataService import DataRetrievalService
 import tkinter
 from tkinter import Tk, Label, messagebox
 
+from WeatherService.HolidayTemperatureStatistics import HolidayTemperatureStatistics
 from WeatherService.Utils import get_item_index_in_list
 
 
@@ -29,6 +31,7 @@ class HolidayTemperatureStatisticGUI:
     yearsList:list[int]
     startingYear:int
     selectedYearsRange:list[int]
+    temperatureStatistics:list[TemperatureStatistic]
 
     def __init__(self, master: tkinter.Tk):
         self.holidayList = DataRetrievalService().get_country_holidays_list()
@@ -61,6 +64,9 @@ class HolidayTemperatureStatisticGUI:
         self.year_range_from_combobox=Combobox(self.right_frame,values=self.yearsList)
         self.year_range_from_combobox.grid(row=0,column=1)
         self.year_range_from_combobox.bind("<<ComboboxSelected>>",self.set_selected_years_range)
+        # btn Show Plot
+        btn = tkinter.Button(self.right_frame, width=30, height=2, text="Generate plot", command=self.generate_plot)
+        btn.grid(row=1, column=0)
 
     def set_holiday_index(self,item):
         selected_item=item.widget.get()
@@ -79,6 +85,14 @@ class HolidayTemperatureStatisticGUI:
             validation_error=True
         if not validation_error:
             self.selectedYearsRange=[year for year in range(self.startingYear,self.startingYear+difference)]
+
+    def set_temperature_statistic(self):
+        temp_stats=HolidayTemperatureStatistics(self.selectedHolidayIndex,self.selectedYearsRange)
+        self.temperatureStatistics=temp_stats.get_temperature_statistic()
+
+    def generate_plot(self):
+        self.set_temperature_statistic()
+        # TODO: Add validation: Holiday must be choosed, Years must be picked. Data from statistic must be present
 
 
 

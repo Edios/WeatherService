@@ -2,6 +2,9 @@
 # from WeatherService.HolidayTemperatureStatistics import HolidayTemperatureStatistics
 from tkinter.ttk import Combobox
 
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+
 from WeatherService.DataModel import TemperatureStatistic
 from WeatherService.DataService import DataRetrievalService
 #
@@ -35,7 +38,8 @@ class HolidayTemperatureStatisticGUI:
 
     def __init__(self, master: tkinter.Tk):
         self.holidayList = DataRetrievalService().get_country_holidays_list()
-        self.yearsList=[year for year in range(2000,2022)]
+        # For Warsaw location statistic are gathered from ~~2014
+        self.yearsList=[year for year in range(2014,2022)]
         # GUI
         self.master = master
         self.master.title("Holiday Temperature Statistic")
@@ -93,9 +97,17 @@ class HolidayTemperatureStatisticGUI:
     def generate_plot(self):
         self.set_temperature_statistic()
         # TODO: Add validation: Holiday must be choosed, Years must be picked. Data from statistic must be present
-
+        x=[stat.date for stat in self.temperatureStatistics]
+        y=[stat.temperature for stat in self.temperatureStatistics]
+        fig = Figure(figsize=(5, 5), dpi=100)
+        plot1 = fig.add_subplot(111)
+        width = .5
+        plot1.bar(x, y, width)
+        canvas = FigureCanvasTkAgg(fig, master=self.plot_frame)
+        canvas.draw()
+        canvas.get_tk_widget().grid(row=0, column=0)
 
 
 root = Tk()
-my_gui = HolidayTemperatureStatisticGUI(root)
+gui = HolidayTemperatureStatisticGUI(root)
 root.mainloop()

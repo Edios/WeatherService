@@ -10,6 +10,7 @@ choosed_holiday=holiday_list[2]
 holiday_index=holiday_list.index(choosed_holiday)
 
 temp_stats=HolidayTemperatureStatistics(holiday_index,years)
+temp_stats.get_temperature_statistic()
 
 list_of_dates=[stat.date for stat in temp_stats.temperatureStatistics]
 list_of_temperatures=[stat.temperature for stat in temp_stats.temperatureStatistics]

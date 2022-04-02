@@ -1,12 +1,12 @@
 from tkinter.ttk import Combobox
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
-from WeatherService.DataModel import TemperatureStatistic
-from WeatherService.DataService import DataRetrievalService
+from DataModel import TemperatureStatistic
+from DataService import DataRetrievalService
 import tkinter
 from tkinter import Tk, Label, messagebox
-from WeatherService.HolidayTemperatureStatistics import HolidayTemperatureStatistics
-from WeatherService.Utils import get_item_index_in_list
+from HolidayTemperatureStatistics import HolidayTemperatureStatistics
+from Utils import get_item_index_in_list
 
 
 class HolidayTemperatureStatisticGUI:

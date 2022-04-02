@@ -1,7 +1,7 @@
 from dataclasses import field, dataclass
 
-from WeatherService.DataModel import Holiday, TemperatureStatistic
-from WeatherService.DataService import DataRetrievalService
+from DataModel import Holiday, TemperatureStatistic
+from DataService import DataRetrievalService
 
 @dataclass
 class HolidayTemperatureStatistics:

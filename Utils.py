@@ -1,4 +1,4 @@
-from WeatherService.DataModel import Holiday
+from DataModel import Holiday
 
 
 def parse_date(date:str):

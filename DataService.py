@@ -1,6 +1,6 @@
 import requests
-from WeatherService.DataModel import Holiday
-from WeatherService.Utils import parse_date
+from DataModel import Holiday
+from Utils import parse_date
 
 
 class DataRetrievalService:
